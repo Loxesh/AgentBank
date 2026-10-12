@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AgentBank | Smart Banking</title>
+
     <style>
         :root {
             --navy: #14264b;
@@ -40,6 +41,7 @@
         }
 
         .brand { display: flex; align-items: center; gap: 12px; }
+
         .brand-icon {
             width: 43px;
             height: 43px;
@@ -90,7 +92,7 @@
             color: white;
             border-radius: 20px;
             padding: 29px;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
             box-shadow: 0 12px 30px #203d8020;
         }
 
@@ -134,7 +136,12 @@
             min-width: 0;
         }
 
-        .card-header { display: flex; align-items: flex-start; gap: 13px; margin-bottom: 22px; }
+        .card-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 13px;
+            margin-bottom: 22px;
+        }
 
         .card-icon {
             flex-shrink: 0;
@@ -150,6 +157,136 @@
 
         .card-header h3 { margin: 1px 0 6px; font-size: 17px; }
         .card-header p { margin: 0; color: var(--muted); font-size: 12px; line-height: 1.5; }
+
+        /* Recent transactions */
+        .transactions-card { margin-bottom: 25px; }
+
+        .transaction-summary {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 18px;
+        }
+
+        .summary-box {
+            flex: 1;
+            min-width: 130px;
+            padding: 14px;
+            background: #f7f9fd;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+        }
+
+        .summary-box span {
+            display: block;
+            color: var(--muted);
+            font-size: 11px;
+            margin-bottom: 7px;
+        }
+
+        .summary-box strong { font-size: 18px; }
+
+        .table-wrap {
+            width: 100%;
+            overflow-x: auto;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+        }
+
+        .transaction-table {
+            width: 100%;
+            min-width: 650px;
+            border-collapse: collapse;
+            text-align: left;
+        }
+
+        .transaction-table th {
+            padding: 14px;
+            background: #f7f9fd;
+            color: var(--muted);
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: .04em;
+            white-space: nowrap;
+        }
+
+        .transaction-table td {
+            padding: 15px 14px;
+            border-top: 1px solid var(--border);
+            font-size: 12px;
+            vertical-align: middle;
+        }
+
+        .transaction-table tbody tr:hover { background: #fafbff; }
+
+        .merchant-cell {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            min-width: 140px;
+        }
+
+        .merchant-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            background: var(--blue-light);
+            color: var(--blue);
+            display: grid;
+            place-items: center;
+            flex-shrink: 0;
+            font-size: 16px;
+        }
+
+        .merchant-name { font-weight: 700; color: var(--text); }
+        .merchant-subtitle { color: var(--muted); font-size: 10px; margin-top: 4px; }
+
+        .amount-debit { color: var(--red); font-weight: 750; white-space: nowrap; }
+        .amount-credit { color: var(--green); font-weight: 750; white-space: nowrap; }
+
+        .type-badge, .status {
+            display: inline-block;
+            padding: 6px 9px;
+            border-radius: 30px;
+            font-size: 10px;
+            font-weight: 800;
+            white-space: nowrap;
+        }
+
+        .type-badge.debit { background: #ffebed; color: var(--red); }
+        .type-badge.credit { background: #e6f6ed; color: var(--green); }
+
+        .status.good { color: var(--green); background: #e6f6ed; }
+        .status.bad { color: var(--red); background: #ffebed; }
+        .status.warn { color: #a66b0a; background: #fff3d9; }
+
+        .transaction-state {
+            text-align: center;
+            padding: 30px 15px;
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        .transaction-state strong {
+            display: block;
+            color: var(--text);
+            font-size: 14px;
+            margin-bottom: 7px;
+        }
+
+        .refresh-btn {
+            background: white;
+            border: 1px solid var(--border);
+            color: var(--blue);
+            border-radius: 8px;
+            padding: 8px 12px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .refresh-btn:hover { background: var(--blue-light); }
 
         .field { margin-bottom: 16px; }
         .field label { display: block; margin-bottom: 8px; font-size: 13px; font-weight: 650; }
@@ -201,11 +338,6 @@
         .result-card.visible { display: block; }
         .result-top { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 13px; }
         .result-top strong { font-size: 13px; }
-        .status { padding: 6px 10px; border-radius: 30px; font-size: 11px; font-weight: 800; }
-        .status.good { color: var(--green); background: #e6f6ed; }
-        .status.bad { color: var(--red); background: #ffebed; }
-        .status.warn { color: #a66b0a; background: #fff3d9; }
-
         .result-message { color: var(--muted); font-size: 12px; line-height: 1.6; margin: 0 0 12px; }
         .metric-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
         .metric { background: white; border: 1px solid var(--border); border-radius: 9px; padding: 12px; min-width: 0; }
@@ -274,6 +406,7 @@
             .brand h1 { font-size: 20px; }
             .balance-card { padding: 22px; }
             .card { padding: 19px; }
+            .transaction-table { min-width: 620px; }
         }
 
         @media (max-width: 480px) {
@@ -284,6 +417,7 @@
         }
     </style>
 </head>
+
 <body>
 <header class="topbar">
     <div class="brand">
@@ -307,6 +441,7 @@
             <h3>Account overview</h3>
             <span>Simulated customer data</span>
         </div>
+
         <div class="balance-card">
             <div class="balance-label">Available account balance</div>
             <div class="balance-amount" id="balance">Loading...</div>
@@ -322,6 +457,58 @@
                 </label>
             </div>
         </div>
+    </section>
+
+    <!-- NEW: Dedicated transaction history section -->
+    <section class="card transactions-card">
+        <div class="section-heading">
+            <div>
+                <h3>Recent Transactions</h3>
+                <span id="transactionCustomer">Loading customer transactions...</span>
+            </div>
+            <button type="button" class="refresh-btn" id="refreshTransactions"
+                    onclick="loadTransactions()">↻ Refresh</button>
+        </div>
+
+        <div class="transaction-summary">
+            <div class="summary-box">
+                <span>Transactions displayed</span>
+                <strong id="transactionCount">—</strong>
+            </div>
+            <div class="summary-box">
+                <span>Total debits displayed</span>
+                <strong id="transactionDebits">—</strong>
+            </div>
+            <div class="summary-box">
+                <span>Total credits displayed</span>
+                <strong id="transactionCredits">—</strong>
+            </div>
+        </div>
+
+        <div class="table-wrap">
+            <table class="transaction-table">
+                <thead>
+                <tr>
+                    <th>Transaction</th>
+                    <th>Type</th>
+                    <th>Amount</th>
+                    <th>Date &amp; time</th>
+                </tr>
+                </thead>
+                <tbody id="transactionRows">
+                <tr>
+                    <td colspan="4" class="transaction-state">
+                        Loading transactions...
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <p class="info-note">
+            Transactions are retrieved from the selected customer's demo database.
+            Amounts and records are simulated for educational purposes.
+        </p>
     </section>
 
     <section class="grid">
@@ -443,7 +630,6 @@
     function money(value) {
         const number = Number(value);
         if (!Number.isFinite(number)) return "Unavailable";
-
         return new Intl.NumberFormat("en-IN", {
             style: "currency",
             currency: "INR",
@@ -454,7 +640,6 @@
     function wholeMoney(value) {
         const number = Number(value);
         if (!Number.isFinite(number)) return "Unavailable";
-
         return new Intl.NumberFormat("en-IN", {
             style: "currency",
             currency: "INR",
@@ -476,7 +661,6 @@
         const element = document.getElementById(elementId);
         element.className = "result-card visible";
         element.innerHTML = "";
-
         const paragraph = document.createElement("p");
         paragraph.className = "result-message";
         paragraph.textContent = message;
@@ -490,7 +674,12 @@
             body: JSON.stringify(data)
         });
 
-        const result = await response.json();
+        let result;
+        try {
+            result = await response.json();
+        } catch {
+            throw new Error("The server returned an invalid response.");
+        }
 
         if (!response.ok || result.error) {
             throw new Error(result.error || "The request failed.");
@@ -530,6 +719,10 @@
         }
     }
 
+    function currentCustomerId() {
+        return document.getElementById("customerId").value;
+    }
+
     function currentLoanInputs() {
         return {
             income: Number(document.getElementById("income").value),
@@ -541,12 +734,16 @@
     }
 
     async function changeCustomer() {
-        await checkBalance();
-        await loadCustomerProfile();
+        // Refresh each customer-specific area when the selection changes.
+        await Promise.all([
+            checkBalance(),
+            loadCustomerProfile(),
+            loadTransactions()
+        ]);
     }
 
     async function checkBalance() {
-        const id = document.getElementById("customerId").value;
+        const id = currentCustomerId();
         const balance = document.getElementById("balance");
         const customer = document.getElementById("customer");
 
@@ -564,13 +761,9 @@
             }
 
             balance.textContent = wholeMoney(result.data.balance);
-            customer.textContent = "Customer ID: " + result.data.customer_id;
+            customer.textContent = "Customer ID: " + (result.data.customer_id || id);
 
-            addActivity(
-                "Account balance retrieved",
-                "Customer " + result.data.customer_id,
-                "SUCCESS"
-            );
+            addActivity("Account balance retrieved", "Customer " + id, "SUCCESS");
         } catch (error) {
             balance.textContent = "Unavailable";
             customer.textContent = error.message;
@@ -578,7 +771,7 @@
     }
 
     async function loadCustomerProfile() {
-        const id = document.getElementById("customerId").value;
+        const id = currentCustomerId();
 
         try {
             const result = await sendRequest({
@@ -602,11 +795,162 @@
                 document.getElementById("creditScore").value = score;
             }
 
-            // Clear the old loan result because the customer has changed.
             document.getElementById("loanResult").className = "result-card";
         } catch (error) {
             console.error("Unable to load customer profile:", error);
         }
+    }
+
+    /*
+     * Transaction panel.
+     * Expected API response: { type: "transactions", data: [...] }
+     * Each transaction should include merchant, amount, kind and created_at.
+     */
+    async function loadTransactions() {
+        const customerId = currentCustomerId();
+        const rows = document.getElementById("transactionRows");
+        const count = document.getElementById("transactionCount");
+        const debits = document.getElementById("transactionDebits");
+        const credits = document.getElementById("transactionCredits");
+        const customerLabel = document.getElementById("transactionCustomer");
+        const refreshButton = document.getElementById("refreshTransactions");
+
+        rows.innerHTML = `
+            <tr><td colspan="4" class="transaction-state">
+                Loading transactions...
+            </td></tr>`;
+
+        customerLabel.textContent = "Customer " + customerId;
+        count.textContent = "—";
+        debits.textContent = "—";
+        credits.textContent = "—";
+        refreshButton.disabled = true;
+
+        try {
+            const result = await sendRequest({
+                task: "transactions",
+                customer_id: customerId
+            });
+
+            /*
+             * The banking agent normally returns transaction records in
+             * result.data. Handle a few common wrapper shapes as well.
+             */
+            let transactions = result.data;
+
+            if (transactions && !Array.isArray(transactions)) {
+                transactions = transactions.transactions
+                    ?? transactions.data
+                    ?? transactions.items;
+            }
+
+            if (!Array.isArray(transactions)) {
+                throw new Error(
+                    "The API did not return a transaction list. Check the transactions task response."
+                );
+            }
+
+            // Capture the customer selection to avoid rendering stale results.
+            if (customerId !== currentCustomerId()) return;
+
+            renderTransactions(transactions);
+
+            customerLabel.textContent =
+                "Showing " + transactions.length + " record(s) for " + customerId;
+
+        } catch (error) {
+            rows.innerHTML = `
+                <tr><td colspan="4" class="transaction-state">
+                    <strong>Unable to load transactions</strong>
+                    ${escapeHTML(error.message)}
+                </td></tr>`;
+
+            customerLabel.textContent = "Could not load customer transactions";
+        } finally {
+            refreshButton.disabled = false;
+        }
+    }
+
+    function renderTransactions(transactions) {
+        const rows = document.getElementById("transactionRows");
+        const count = document.getElementById("transactionCount");
+        const debits = document.getElementById("transactionDebits");
+        const credits = document.getElementById("transactionCredits");
+
+        if (!transactions.length) {
+            rows.innerHTML = `
+                <tr><td colspan="4" class="transaction-state">
+                    <strong>No transactions found</strong>
+                    This customer has no transaction records to display.
+                </td></tr>`;
+
+            count.textContent = "0";
+            debits.textContent = wholeMoney(0);
+            credits.textContent = wholeMoney(0);
+            return;
+        }
+
+        let debitTotal = 0;
+        let creditTotal = 0;
+
+        rows.innerHTML = transactions.map(transaction => {
+            const amount = Number(transaction.amount ?? 0);
+            const kind = String(transaction.kind ?? transaction.type ?? "debit").toLowerCase();
+            const isCredit = kind === "credit";
+            const merchant = transaction.merchant ?? transaction.description ?? "Transaction";
+            const dateValue = transaction.created_at ?? transaction.date ?? transaction.timestamp;
+            const formattedDate = formatDate(dateValue);
+
+            if (isCredit) {
+                creditTotal += Number.isFinite(amount) ? amount : 0;
+            } else {
+                debitTotal += Number.isFinite(amount) ? amount : 0;
+            }
+
+            const icon = isCredit ? "↓" : "↗";
+            const typeClass = isCredit ? "credit" : "debit";
+            const amountClass = isCredit ? "amount-credit" : "amount-debit";
+            const sign = isCredit ? "+" : "−";
+
+            return `
+                <tr>
+                    <td>
+                        <div class="merchant-cell">
+                            <div class="merchant-icon">${icon}</div>
+                            <div>
+                                <div class="merchant-name">${escapeHTML(merchant)}</div>
+                                <div class="merchant-subtitle">Transaction #${escapeHTML(transaction.id ?? "—")}</div>
+                            </div>
+                        </div>
+                    </td>
+                    <td><span class="type-badge ${typeClass}">${isCredit ? "CREDIT" : "DEBIT"}</span></td>
+                    <td class="${amountClass}">${sign}${wholeMoney(amount)}</td>
+                    <td>${escapeHTML(formattedDate)}</td>
+                </tr>`;
+        }).join("");
+
+        count.textContent = String(transactions.length);
+        debits.textContent = wholeMoney(debitTotal);
+        credits.textContent = wholeMoney(creditTotal);
+    }
+
+    function formatDate(value) {
+        if (!value) return "Date unavailable";
+
+        const date = new Date(value);
+
+        if (Number.isNaN(date.getTime())) {
+            // If the backend provides an unparseable date string, display it safely.
+            return String(value);
+        }
+
+        return date.toLocaleString("en-IN", {
+            day: "2-digit",
+            month: "short",
+            year: "numeric",
+            hour: "2-digit",
+            minute: "2-digit"
+        });
     }
 
     async function checkRisk() {
@@ -686,7 +1030,6 @@
         button.textContent = "Evaluating...";
 
         try {
-            // The checker and chat use the same Loan Agent and same values.
             const result = await sendRequest({
                 task: "loan",
                 income: inputs.income,
@@ -699,8 +1042,7 @@
             renderLoanResult(result, inputs);
             addActivity(
                 "Loan eligibility checked",
-                wholeMoney(inputs.loan_amount) + " · " +
-                    (result.eligible ? "Eligible" : "Not eligible"),
+                wholeMoney(inputs.loan_amount) + " · " + (result.eligible ? "Eligible" : "Not eligible"),
                 "COMPLETE"
             );
         } catch (error) {
@@ -740,8 +1082,7 @@
                     <span class="metric-label">Credit score</span>
                     <span class="metric-value">${inputs.credit_score}</span>
                 </div>
-            </div>
-        `;
+            </div>`;
 
         card.className = "result-card visible";
     }
@@ -765,8 +1106,7 @@
 
         if (!question) return;
 
-        // Capture the latest form values at the moment the user asks.
-        const customerId = document.getElementById("customerId").value;
+        const customerId = currentCustomerId();
         const loanInputs = currentLoanInputs();
 
         addChatMessage(question, "user");
@@ -790,19 +1130,13 @@
 
             reply.textContent = result.answer || "The assistant returned no answer.";
 
-            // For loan questions, display structured numbers from the actual
-            // Loan Agent result, not just the natural-language explanation.
-            if (
-                result.agent === "Loan Agent" &&
-                typeof result.eligible === "boolean"
-            ) {
+            if (result.agent === "Loan Agent" && typeof result.eligible === "boolean") {
                 reply.textContent =
                     result.answer +
                     "\n\nDecision: " + (result.eligible ? "ELIGIBLE" : "NOT ELIGIBLE") +
                     "\nRequested amount: " + wholeMoney(result.loan_amount) +
                     "\nMonthly EMI: " + money(result.estimated_emi) +
-                    "\nEMI / income: " +
-                    Number(result.debt_ratio_percent ?? 0).toFixed(1) + "%";
+                    "\nEMI / income: " + Number(result.debt_ratio_percent ?? 0).toFixed(1) + "%";
             }
 
             addActivity(
@@ -824,10 +1158,12 @@
         log.scrollTop = log.scrollHeight;
     }
 
-    // Initial page load: fetch the selected customer's real demo data.
     async function initializeDashboard() {
-        await checkBalance();
-        await loadCustomerProfile();
+        await Promise.all([
+            checkBalance(),
+            loadCustomerProfile(),
+            loadTransactions()
+        ]);
     }
 
     initializeDashboard();
