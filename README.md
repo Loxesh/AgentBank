@@ -75,10 +75,9 @@ The SQLite database is created locally when the application initializes.
 
 ### 1. Clone the repository
 
-Replace `YOUR_USERNAME` with your GitHub username.
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/AgentBank.git
+git clone https://github.com/Loxesh/AgentBank.git
 cd AgentBank
 ```
 
