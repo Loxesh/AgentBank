@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AgentBank | Smart Banking</title>
-
     <style>
         :root {
             --navy: #14264b;
@@ -17,7 +16,6 @@
             --border: #e4eaf3;
             --green: #15845b;
             --red: #c53e4b;
-            --amber: #a66b0a;
         }
 
         * { box-sizing: border-box; }
@@ -41,12 +39,7 @@
             gap: 14px;
         }
 
-        .brand {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
+        .brand { display: flex; align-items: center; gap: 12px; }
         .brand-icon {
             width: 43px;
             height: 43px;
@@ -102,13 +95,7 @@
         }
 
         .balance-label { color: #d7e2ff; font-size: 13px; }
-
-        .balance-amount {
-            font-size: clamp(31px, 5vw, 43px);
-            font-weight: 750;
-            margin: 12px 0;
-            overflow-wrap: anywhere;
-        }
+        .balance-amount { font-size: clamp(31px, 5vw, 43px); font-weight: 750; margin: 12px 0; }
 
         .balance-bottom {
             display: flex;
@@ -147,12 +134,7 @@
             min-width: 0;
         }
 
-        .card-header {
-            display: flex;
-            align-items: flex-start;
-            gap: 13px;
-            margin-bottom: 22px;
-        }
+        .card-header { display: flex; align-items: flex-start; gap: 13px; margin-bottom: 22px; }
 
         .card-icon {
             flex-shrink: 0;
@@ -170,13 +152,7 @@
         .card-header p { margin: 0; color: var(--muted); font-size: 12px; line-height: 1.5; }
 
         .field { margin-bottom: 16px; }
-
-        .field label {
-            display: block;
-            margin-bottom: 8px;
-            font-size: 13px;
-            font-weight: 650;
-        }
+        .field label { display: block; margin-bottom: 8px; font-size: 13px; font-weight: 650; }
 
         .field input, .field select {
             width: 100%;
@@ -195,16 +171,7 @@
         }
 
         .check-list { display: grid; gap: 12px; margin: 18px 0; }
-
-        .check-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            color: #4d5c73;
-            font-size: 13px;
-            cursor: pointer;
-        }
-
+        .check-item { display: flex; align-items: center; gap: 10px; color: #4d5c73; font-size: 13px; cursor: pointer; }
         .check-item input { width: 17px; height: 17px; accent-color: var(--blue); }
 
         .primary-btn {
@@ -216,6 +183,7 @@
             color: white;
             font-weight: 700;
             transition: background .2s;
+            cursor: pointer;
         }
 
         .primary-btn:hover { background: #2446a8; }
@@ -231,51 +199,22 @@
         }
 
         .result-card.visible { display: block; }
-
-        .result-top {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 10px;
-            margin-bottom: 13px;
-        }
-
+        .result-top { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 13px; }
         .result-top strong { font-size: 13px; }
-
-        .status {
-            padding: 6px 10px;
-            border-radius: 30px;
-            font-size: 11px;
-            font-weight: 800;
-        }
-
+        .status { padding: 6px 10px; border-radius: 30px; font-size: 11px; font-weight: 800; }
         .status.good { color: var(--green); background: #e6f6ed; }
         .status.bad { color: var(--red); background: #ffebed; }
-        .status.warn { color: var(--amber); background: #fff3d9; }
+        .status.warn { color: #a66b0a; background: #fff3d9; }
 
         .result-message { color: var(--muted); font-size: 12px; line-height: 1.6; margin: 0 0 12px; }
-
-        .metric-grid {
-            display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 10px;
-        }
-
-        .metric {
-            background: white;
-            border: 1px solid var(--border);
-            border-radius: 9px;
-            padding: 12px;
-            min-width: 0;
-        }
-
+        .metric-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+        .metric { background: white; border: 1px solid var(--border); border-radius: 9px; padding: 12px; min-width: 0; }
         .metric-label { display: block; color: var(--muted); font-size: 11px; margin-bottom: 7px; }
         .metric-value { display: block; font-size: 17px; font-weight: 750; overflow-wrap: anywhere; }
-
         .reasons { color: var(--muted); font-size: 12px; line-height: 1.6; padding-left: 18px; margin-bottom: 0; }
         .info-note { margin-top: 13px; color: var(--muted); font-size: 11px; line-height: 1.6; }
 
-        .chat-card { margin-top: 24px; }
+        .chat-card, .activity-card { margin-top: 24px; }
 
         .chat-log {
             display: flex;
@@ -296,25 +235,10 @@
             white-space: pre-wrap;
         }
 
-        .chat-message.assistant {
-            align-self: flex-start;
-            background: #eef2fa;
-            color: var(--text);
-            border-bottom-left-radius: 4px;
-        }
+        .chat-message.assistant { align-self: flex-start; background: #eef2fa; color: var(--text); border-bottom-left-radius: 4px; }
+        .chat-message.user { align-self: flex-end; background: var(--blue); color: white; border-bottom-right-radius: 4px; }
 
-        .chat-message.user {
-            align-self: flex-end;
-            background: var(--blue);
-            color: white;
-            border-bottom-right-radius: 4px;
-        }
-
-        .chat-form {
-            display: flex;
-            align-items: stretch;
-            gap: 10px;
-        }
+        .chat-form { display: flex; align-items: stretch; gap: 10px; }
 
         .chat-form textarea {
             flex: 1;
@@ -329,75 +253,44 @@
             outline: none;
         }
 
-        .chat-form button {
-            width: auto;
-            min-width: 115px;
-            padding: 12px 17px;
-            align-self: stretch;
-        }
-
+        .chat-form button { width: auto; min-width: 115px; padding: 12px 17px; align-self: stretch; }
         .chat-note { color: var(--muted); font-size: 11px; line-height: 1.6; margin-top: 12px; }
 
-        .activity-card { margin-top: 24px; }
         .activity-list { display: grid; gap: 12px; }
-
-        .activity-item {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 13px 0;
-            border-bottom: 1px solid var(--border);
-        }
-
+        .activity-item { display: flex; align-items: center; gap: 12px; padding: 13px 0; border-bottom: 1px solid var(--border); }
         .activity-item:last-child { border-bottom: 0; }
-
-        .activity-icon {
-            width: 38px;
-            height: 38px;
-            border-radius: 11px;
-            background: var(--blue-light);
-            color: var(--blue);
-            display: grid;
-            place-items: center;
-        }
-
+        .activity-icon { width: 38px; height: 38px; border-radius: 11px; background: var(--blue-light); color: var(--blue); display: grid; place-items: center; flex-shrink: 0; }
         .activity-text { flex: 1; min-width: 0; }
         .activity-text strong { display: block; font-size: 13px; margin-bottom: 4px; }
         .activity-text span { color: var(--muted); font-size: 11px; }
-        .activity-status { color: var(--green); font-size: 11px; font-weight: 700; }
+        .activity-status { font-size: 10px; font-weight: 800; color: var(--green); background: #e6f6ed; border-radius: 20px; padding: 6px 8px; white-space: nowrap; }
 
-        footer {
-            text-align: center;
-            color: var(--muted);
-            font-size: 11px;
-            line-height: 1.7;
-            padding: 22px 10px 5px;
-        }
+        footer { text-align: center; color: var(--muted); font-size: 11px; padding: 0 20px 25px; }
 
         @media (max-width: 760px) {
-            main { margin-top: 24px; padding: 0 15px 28px; }
+            main { margin-top: 24px; padding: 0 15px 30px; }
             .grid { grid-template-columns: 1fr; }
+            .topbar { padding: 15px 18px; }
+            .brand h1 { font-size: 20px; }
+            .balance-card { padding: 22px; }
             .card { padding: 19px; }
-            .balance-card { padding: 23px; }
-            .topbar { padding: 15px 5%; }
-            .demo-pill { font-size: 10px; }
         }
 
-        @media (max-width: 440px) {
+        @media (max-width: 480px) {
+            .demo-pill { font-size: 10px; padding: 7px 9px; }
             .chat-form { flex-direction: column; }
-            .chat-form button { width: 100%; }
-            .brand h1 { font-size: 20px; }
+            .chat-form button { width: 100%; min-height: 45px; }
+            .chat-message { max-width: 96%; }
         }
     </style>
 </head>
-
 <body>
 <header class="topbar">
     <div class="brand">
-        <div class="brand-icon">A</div>
+        <div class="brand-icon">₹</div>
         <div>
             <h1>AgentBank</h1>
-            <p>Intelligent Banking Platform</p>
+            <p>Multi-Agent Banking Intelligence</p>
         </div>
     </div>
     <div class="demo-pill">● DEMO ENVIRONMENT</div>
@@ -405,86 +298,89 @@
 
 <main>
     <section class="welcome">
-        <h2>Welcome back 👋</h2>
-        <p>Explore demo accounts, transaction risks, loan eligibility and your local AI assistant.</p>
+        <h2>Welcome to AgentBank</h2>
+        <p>Explore banking services powered by specialized agents and a local AI assistant.</p>
     </section>
 
-    <section class="balance-card">
-        <div class="balance-label">AVAILABLE DEMO BALANCE</div>
-        <div class="balance-amount" id="balance">₹ —</div>
-        <div class="balance-bottom">
-            <span id="customer">Choose a demo account</span>
-            <select id="customerId" class="customer-select"
-                    aria-label="Select demo customer"
-                    onchange="checkBalance()">
-                <option value="C101">Asha Kumar · C101</option>
-                <option value="C102">Ravi Shah · C102</option>
-                <option value="C103">Maya Iyer · C103</option>
-            </select>
+    <section>
+        <div class="section-heading">
+            <h3>Account overview</h3>
+            <span>Simulated customer data</span>
+        </div>
+        <div class="balance-card">
+            <div class="balance-label">Available account balance</div>
+            <div class="balance-amount" id="balance">Loading...</div>
+            <div class="balance-bottom">
+                <span id="customer">Fetching demo account</span>
+                <label>
+                    Customer:
+                    <select id="customerId" class="customer-select" onchange="changeCustomer()">
+                        <option value="C101">C101 · Asha Kumar</option>
+                        <option value="C102">C102 · Ravi Shah</option>
+                        <option value="C103">C103 · Maya Iyer</option>
+                    </select>
+                </label>
+            </div>
         </div>
     </section>
 
-    <div class="section-heading">
-        <h3>Banking tools</h3>
-        <span>Powered by specialist agents</span>
-    </div>
-
-    <div class="grid">
-        <section class="card">
+    <section class="grid">
+        <article class="card">
             <div class="card-header">
-                <div class="card-icon">🛡️</div>
+                <div class="card-icon">⌁</div>
                 <div>
-                    <h3>Fraud Risk Simulator</h3>
-                    <p>Evaluate a fictional transaction using explainable demo rules.</p>
+                    <h3>Fraud Risk Analyzer</h3>
+                    <p>Evaluate a simulated transaction using demo risk rules.</p>
                 </div>
             </div>
 
             <div class="field">
                 <label for="amount">Transaction amount (₹)</label>
-                <input id="amount" type="number" value="60000" min="0.01" step="0.01">
+                <input id="amount" type="number" min="1" step="0.01" value="60000">
             </div>
 
             <div class="check-list">
-                <label class="check-item"><input id="international" type="checkbox"> International transaction</label>
-                <label class="check-item"><input id="newDevice" type="checkbox"> New device</label>
-                <label class="check-item"><input id="lateNight" type="checkbox"> Unusual transaction hour</label>
+                <label class="check-item"><input id="international" type="checkbox" checked> International transaction</label>
+                <label class="check-item"><input id="newDevice" type="checkbox" checked> New or unrecognized device</label>
+                <label class="check-item"><input id="lateNight" type="checkbox"> Unusual late-night activity</label>
             </div>
 
-            <button class="primary-btn" id="riskBtn" onclick="checkRisk()">Analyze transaction →</button>
-            <div class="result-card" id="riskResult" aria-live="polite"></div>
-        </section>
+            <button id="riskBtn" class="primary-btn" onclick="checkRisk()">Analyze transaction →</button>
+            <div id="riskResult" class="result-card"></div>
+            <p class="info-note">This is a simulated risk score for demonstration, not a real bank fraud decision.</p>
+        </article>
 
-        <section class="card">
+        <article class="card">
             <div class="card-header">
-                <div class="card-icon">💳</div>
+                <div class="card-icon">₹</div>
                 <div>
                     <h3>Loan Eligibility Checker</h3>
-                    <p>Estimate eligibility and monthly EMI using demo criteria.</p>
+                    <p>Estimate eligibility using the selected customer's financial profile.</p>
                 </div>
             </div>
 
             <div class="field">
                 <label for="income">Monthly income (₹)</label>
-                <input id="income" type="number" value="90000" min="1">
+                <input id="income" type="number" min="1" value="90000">
             </div>
 
             <div class="field">
                 <label for="emi">Existing monthly EMI (₹)</label>
-                <input id="emi" type="number" value="12000" min="0">
+                <input id="emi" type="number" min="0" value="12000">
             </div>
 
             <div class="field">
                 <label for="creditScore">Credit score (0–900)</label>
-                <input id="creditScore" type="number" value="760" min="0" max="900">
+                <input id="creditScore" type="number" min="0" max="900" value="760">
             </div>
 
             <div class="field">
                 <label for="loanAmount">Requested loan amount (₹)</label>
-                <input id="loanAmount" type="number" value="500000" min="1">
+                <input id="loanAmount" type="number" min="1" value="500000">
             </div>
 
             <div class="field">
-                <label for="months">Repayment period</label>
+                <label for="months">Loan duration</label>
                 <select id="months">
                     <option value="12">12 months</option>
                     <option value="24">24 months</option>
@@ -494,92 +390,97 @@
                 </select>
             </div>
 
-            <button class="primary-btn" id="loanBtn" onclick="checkLoan()">Evaluate eligibility →</button>
-            <div class="result-card" id="loanResult" aria-live="polite"></div>
-
-            <p class="info-note">Educational simulation only. Assumes 12% annual interest and fictional eligibility rules. Not a real credit decision.</p>
-        </section>
-    </div>
+            <button id="loanBtn" class="primary-btn" onclick="checkLoan()">Evaluate eligibility →</button>
+            <div id="loanResult" class="result-card"></div>
+            <p class="info-note">This is a demo eligibility estimate, not a loan approval or a real financial offer.</p>
+        </article>
+    </section>
 
     <section class="card chat-card">
         <div class="card-header">
             <div class="card-icon">✦</div>
             <div>
-                <h3>AI Banking Assistant</h3>
-                <p>Ask a banking question using your locally running Ollama model.</p>
+                <h3>AgentBank AI Assistant</h3>
+                <p>Ask about the selected customer, balance, loan eligibility, spending, transactions, or risk.</p>
             </div>
         </div>
 
-        <div class="chat-log" id="chatLog" aria-live="polite">
-            <div class="chat-message assistant">Hi! I'm your local AgentBank assistant. Ask me about banking concepts, loan basics, budgeting or fraud prevention.</div>
+        <div id="chatLog" class="chat-log">
+            <div class="chat-message assistant">Hi! I'm your AgentBank assistant. I use the selected customer's data and the current loan checker values to answer banking questions.</div>
         </div>
 
-        <form class="chat-form" id="chatForm">
-            <textarea id="chatQuestion" rows="2" maxlength="1000"
-                      placeholder="Ask a banking question..." required></textarea>
-            <button class="primary-btn" id="chatBtn" type="submit">Ask AI →</button>
+        <form id="chatForm" class="chat-form">
+            <textarea id="chatQuestion" maxlength="1000" placeholder="Try: Am I eligible for a loan?" aria-label="Ask the banking assistant" required></textarea>
+            <button id="chatBtn" class="primary-btn" type="submit">Ask AI →</button>
         </form>
 
-        <p class="chat-note">
-            Responses are generated by the local llama3.2:3b model and may be inaccurate.
-            This assistant cannot access real accounts or execute transactions.
-            Do not enter passwords, PINs, or other sensitive information.
-        </p>
+        <p class="chat-note">Banking calculations use your demo agents. General questions use the local llama3.2:3b model and may be inaccurate. This assistant cannot access real bank accounts or execute transactions. Never enter passwords or PINs.</p>
     </section>
 
     <section class="card activity-card">
         <div class="section-heading">
-            <h3>Recent agent activity</h3>
-            <span>Current session</span>
+            <h3>Recent activity</h3>
+            <span>Latest demo actions</span>
         </div>
-        <div class="activity-list" id="activityList">
+        <div id="activityList" class="activity-list">
             <div class="activity-item">
-                <div class="activity-icon">🏦</div>
+                <div class="activity-icon">✦</div>
                 <div class="activity-text">
-                    <strong>AgentBank is ready</strong>
-                    <span>Choose a tool above to begin.</span>
+                    <strong>AgentBank initialized</strong>
+                    <span>Demo dashboard is ready.</span>
                 </div>
                 <span class="activity-status">READY</span>
             </div>
         </div>
     </section>
-
-    <footer>
-        AgentBank · Multi-Agent Banking Simulation<br>
-        Uses fictional customer data and demonstration rules. No real transactions are performed.
-    </footer>
 </main>
 
-<script>
-    const money = value =>
-        "₹" + Number(value).toLocaleString("en-IN", {
-            minimumFractionDigits: 2,
-            maximumFractionDigits: 2
-        });
+<footer>
+    AgentBank is an educational demo using synthetic customer data. It is not connected to a real bank.
+</footer>
 
-    const wholeMoney = value =>
-        "₹" + Number(value).toLocaleString("en-IN", {
+<script>
+    function money(value) {
+        const number = Number(value);
+        if (!Number.isFinite(number)) return "Unavailable";
+
+        return new Intl.NumberFormat("en-IN", {
+            style: "currency",
+            currency: "INR",
             maximumFractionDigits: 2
-        });
+        }).format(number);
+    }
+
+    function wholeMoney(value) {
+        const number = Number(value);
+        if (!Number.isFinite(number)) return "Unavailable";
+
+        return new Intl.NumberFormat("en-IN", {
+            style: "currency",
+            currency: "INR",
+            maximumFractionDigits: 0
+        }).format(number);
+    }
 
     function escapeHTML(value) {
-        return String(value).replace(/[&<>"']/g, char => ({
+        return String(value ?? "").replace(/[&<>"']/g, character => ({
             "&": "&amp;",
             "<": "&lt;",
             ">": "&gt;",
             '"': "&quot;",
             "'": "&#39;"
-        })[char]);
+        })[character]);
     }
 
     function showError(elementId, message) {
         const element = document.getElementById(elementId);
         element.className = "result-card visible";
         element.innerHTML = "";
-        const p = document.createElement("p");
-        p.className = "result-message";
-        p.textContent = message;
-        element.appendChild(p);
+
+        const paragraph = document.createElement("p");
+        paragraph.className = "result-message";
+        paragraph.textContent = message;
+        element.appendChild(paragraph);
     }
 
     async function sendRequest(data) {
@@ -629,6 +530,21 @@
         }
     }
 
+    function currentLoanInputs() {
+        return {
+            income: Number(document.getElementById("income").value),
+            existing_emi: Number(document.getElementById("emi").value),
+            credit_score: Number(document.getElementById("creditScore").value),
+            loan_amount: Number(document.getElementById("loanAmount").value),
+            loan_months: Number(document.getElementById("months").value)
+        };
+    }
+
+    async function changeCustomer() {
+        await checkBalance();
+        await loadCustomerProfile();
+    }
+
     async function checkBalance() {
         const id = document.getElementById("customerId").value;
         const balance = document.getElementById("balance");
@@ -650,10 +566,46 @@
             balance.textContent = wholeMoney(result.data.balance);
             customer.textContent = "Customer ID: " + result.data.customer_id;
 
-            addActivity("Account balance retrieved", "Customer " + result.data.customer_id, "SUCCESS");
+            addActivity(
+                "Account balance retrieved",
+                "Customer " + result.data.customer_id,
+                "SUCCESS"
+            );
         } catch (error) {
             balance.textContent = "Unavailable";
             customer.textContent = error.message;
+        }
+    }
+
+    async function loadCustomerProfile() {
+        const id = document.getElementById("customerId").value;
+
+        try {
+            const result = await sendRequest({
+                task: "customer",
+                customer_id: id
+            });
+
+            const profile = result.data || {};
+
+            if (profile.income !== undefined) {
+                document.getElementById("income").value = profile.income;
+            }
+
+            if (profile.existing_emi !== undefined) {
+                document.getElementById("emi").value = profile.existing_emi;
+            }
+
+            const score = profile.credit_score ?? profile.score;
+
+            if (score !== undefined) {
+                document.getElementById("creditScore").value = score;
+            }
+
+            // Clear the old loan result because the customer has changed.
+            document.getElementById("loanResult").className = "result-card";
+        } catch (error) {
+            console.error("Unable to load customer profile:", error);
         }
     }
 
@@ -668,12 +620,11 @@
 
         button.disabled = true;
         button.textContent = "Analyzing...";
-        document.getElementById("riskResult").className = "result-card";
 
         try {
             const result = await sendRequest({
                 task: "risk",
-                amount: amount,
+                amount,
                 international: document.getElementById("international").checked,
                 new_device: document.getElementById("newDevice").checked,
                 late_night: document.getElementById("lateNight").checked
@@ -682,22 +633,30 @@
             const risk = result.risk_level;
             const statusClass = risk === "HIGH" ? "bad" : risk === "MEDIUM" ? "warn" : "good";
             const reasons = Array.isArray(result.reasons) ? result.reasons : [];
-
             const card = document.getElementById("riskResult");
+
             card.innerHTML = `
                 <div class="result-top">
                     <strong>Risk assessment</strong>
                     <span class="status ${statusClass}">${escapeHTML(risk || "UNKNOWN")} RISK</span>
                 </div>
                 <div class="metric-grid">
-                    <div class="metric"><span class="metric-label">Transaction amount</span><span class="metric-value">${wholeMoney(amount)}</span></div>
-                    <div class="metric"><span class="metric-label">Risk score</span><span class="metric-value">${Number(result.risk_score ?? 0)}/100</span></div>
+                    <div class="metric">
+                        <span class="metric-label">Transaction amount</span>
+                        <span class="metric-value">${wholeMoney(amount)}</span>
+                    </div>
+                    <div class="metric">
+                        <span class="metric-label">Risk score</span>
+                        <span class="metric-value">${Number(result.risk_score ?? 0)}/100</span>
+                    </div>
                 </div>
-                <p class="result-message" style="margin-top:13px">${reasons.length ? "Factors identified:" : "No risk factors identified by demo rules."}</p>
-                ${reasons.length ? `<ul class="reasons">${reasons.map(reason => `<li>${escapeHTML(reason)}</li>`).join("")}</ul>` : ""}
+                <p class="result-message" style="margin-top:13px">
+                    ${reasons.length ? "Factors identified:" : "No risk factors identified by demo rules."}
+                </p>
+                ${reasons.length ? `<ul class="reasons">${reasons.map(r => `<li>${escapeHTML(r)}</li>`).join("")}</ul>` : ""}
             `;
-            card.className = "result-card visible";
 
+            card.className = "result-card visible";
             addActivity("Fraud risk assessment", wholeMoney(amount) + " · " + risk + " risk", "COMPLETE");
         } catch (error) {
             showError("riskResult", error.message);
@@ -709,61 +668,82 @@
 
     async function checkLoan() {
         const button = document.getElementById("loanBtn");
-        const income = Number(document.getElementById("income").value);
-        const emi = Number(document.getElementById("emi").value);
-        const score = Number(document.getElementById("creditScore").value);
-        const amount = Number(document.getElementById("loanAmount").value);
-        const months = Number(document.getElementById("months").value);
+        const inputs = currentLoanInputs();
 
         if (
-            !Number.isFinite(income) || income <= 0 ||
-            !Number.isFinite(emi) || emi < 0 ||
-            !Number.isFinite(score) || score < 0 || score > 900 ||
-            !Number.isFinite(amount) || amount <= 0
+            !Number.isFinite(inputs.income) || inputs.income <= 0 ||
+            !Number.isFinite(inputs.existing_emi) || inputs.existing_emi < 0 ||
+            !Number.isFinite(inputs.credit_score) ||
+            inputs.credit_score < 0 || inputs.credit_score > 900 ||
+            !Number.isFinite(inputs.loan_amount) || inputs.loan_amount <= 0 ||
+            ![12, 24, 36, 48, 60].includes(inputs.loan_months)
         ) {
-            showError("loanResult", "Enter valid income, EMI, credit score (0–900), and loan amount.");
+            showError("loanResult", "Please check all financial inputs and loan duration.");
             return;
         }
 
         button.disabled = true;
         button.textContent = "Evaluating...";
-        document.getElementById("loanResult").className = "result-card";
 
         try {
+            // The checker and chat use the same Loan Agent and same values.
             const result = await sendRequest({
                 task: "loan",
-                income: income,
-                existing_emi: emi,
-                credit_score: score,
-                amount: amount,
-                months: months
+                income: inputs.income,
+                existing_emi: inputs.existing_emi,
+                credit_score: inputs.credit_score,
+                amount: inputs.loan_amount,
+                months: inputs.loan_months
             });
 
-            const eligible = result.eligible === true;
-            const card = document.getElementById("loanResult");
-
-            card.innerHTML = `
-                <div class="result-top">
-                    <strong>Eligibility assessment</strong>
-                    <span class="status ${eligible ? "good" : "bad"}">${eligible ? "ELIGIBLE" : "NOT ELIGIBLE"}</span>
-                </div>
-                <p class="result-message">${escapeHTML(result.reason || "Demo assessment complete.")}</p>
-                <div class="metric-grid">
-                    <div class="metric"><span class="metric-label">Requested amount</span><span class="metric-value">${wholeMoney(result.loan_amount)}</span></div>
-                    <div class="metric"><span class="metric-label">Estimated monthly EMI</span><span class="metric-value">${money(result.estimated_emi)}</span></div>
-                    <div class="metric"><span class="metric-label">Total EMI / income</span><span class="metric-value">${Number(result.debt_ratio_percent).toFixed(1)}%</span></div>
-                    <div class="metric"><span class="metric-label">Credit score</span><span class="metric-value">${Number(result.credit_score)}</span></div>
-                </div>
-            `;
-            card.className = "result-card visible";
-
-            addActivity("Loan eligibility checked", wholeMoney(amount) + " · " + (eligible ? "Eligible" : "Not eligible"), "COMPLETE");
+            renderLoanResult(result, inputs);
+            addActivity(
+                "Loan eligibility checked",
+                wholeMoney(inputs.loan_amount) + " · " +
+                    (result.eligible ? "Eligible" : "Not eligible"),
+                "COMPLETE"
+            );
         } catch (error) {
             showError("loanResult", error.message);
         } finally {
             button.disabled = false;
             button.textContent = "Evaluate eligibility →";
         }
+    }
+
+    function renderLoanResult(result, inputs) {
+        const eligible = result.eligible === true;
+        const card = document.getElementById("loanResult");
+
+        card.innerHTML = `
+            <div class="result-top">
+                <strong>Eligibility assessment</strong>
+                <span class="status ${eligible ? "good" : "bad"}">
+                    ${eligible ? "ELIGIBLE" : "NOT ELIGIBLE"}
+                </span>
+            </div>
+            <p class="result-message">${escapeHTML(result.reason || "Demo assessment complete.")}</p>
+            <div class="metric-grid">
+                <div class="metric">
+                    <span class="metric-label">Requested amount</span>
+                    <span class="metric-value">${wholeMoney(result.loan_amount ?? inputs.loan_amount)}</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-label">Estimated monthly EMI</span>
+                    <span class="metric-value">${money(result.estimated_emi)}</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-label">Total EMI / income</span>
+                    <span class="metric-value">${Number(result.debt_ratio_percent ?? 0).toFixed(1)}%</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-label">Credit score</span>
+                    <span class="metric-value">${inputs.credit_score}</span>
+                </div>
+            </div>
+        `;
+
+        card.className = "result-card visible";
     }
 
     function addChatMessage(message, role) {
@@ -785,37 +765,72 @@
 
         if (!question) return;
 
+        // Capture the latest form values at the moment the user asks.
+        const customerId = document.getElementById("customerId").value;
+        const loanInputs = currentLoanInputs();
+
         addChatMessage(question, "user");
         input.value = "";
-        input.focus();
-
         button.disabled = true;
         button.textContent = "Thinking...";
 
-        const reply = addChatMessage("Thinking with the local AI model...", "assistant");
+        const reply = addChatMessage("Checking the latest information...", "assistant");
 
         try {
             const result = await sendRequest({
                 task: "chat",
-                question: question
+                question,
+                customer_id: customerId,
+                income: loanInputs.income,
+                existing_emi: loanInputs.existing_emi,
+                credit_score: loanInputs.credit_score,
+                loan_amount: loanInputs.loan_amount,
+                loan_months: loanInputs.loan_months
             });
 
             reply.textContent = result.answer || "The assistant returned no answer.";
 
-            if (result.success) {
-                addActivity("AI assistant responded", "Model: " + (result.model || "local model"), "COMPLETE");
-            } else {
-                addActivity("AI assistant issue", "Check Ollama status", "NOTICE");
+            // For loan questions, display structured numbers from the actual
+            // Loan Agent result, not just the natural-language explanation.
+            if (
+                result.agent === "Loan Agent" &&
+                typeof result.eligible === "boolean"
+            ) {
+                reply.textContent =
+                    result.answer +
+                    "\n\nDecision: " + (result.eligible ? "ELIGIBLE" : "NOT ELIGIBLE") +
+                    "\nRequested amount: " + wholeMoney(result.loan_amount) +
+                    "\nMonthly EMI: " + money(result.estimated_emi) +
+                    "\nEMI / income: " +
+                    Number(result.debt_ratio_percent ?? 0).toFixed(1) + "%";
             }
+
+            addActivity(
+                "AI assistant responded",
+                "Source: " + (result.agent || result.model || "local model"),
+                result.success ? "COMPLETE" : "NOTICE"
+            );
         } catch (error) {
             reply.textContent = "Unable to get a response: " + error.message;
         } finally {
             button.disabled = false;
             button.textContent = "Ask AI →";
+            logScrollToBottom();
         }
     });
 
-    checkBalance();
+    function logScrollToBottom() {
+        const log = document.getElementById("chatLog");
+        log.scrollTop = log.scrollHeight;
+    }
+
+    // Initial page load: fetch the selected customer's real demo data.
+    async function initializeDashboard() {
+        await checkBalance();
+        await loadCustomerProfile();
+    }
+
+    initializeDashboard();
 </script>
 </body>
 </html>
